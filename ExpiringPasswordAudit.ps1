@@ -1,9 +1,17 @@
-import-module ActiveDirectory;
+#Script checks for AD accounts nearing expiration and emails reminders to the users.
+#Already-expired passwords also have a notification sent to the configured administrator email address.
+#This can be configured as a scheduled task to run at whatever interval is desired.
+
+#Written by Mike McGlothern 2/23/2016, version 1.0
+
+#CONFIGURE THESE VARIABLES BEFORE USE
 $SMTPServerIP = "YOUR IP HERE"
 $FromAddress = "Your sending email address here"
 $AdminAddress = "Your address for expired account notifications"
 
 $maxPasswordAgeTimeSpan = (Get-ADDefaultDomainPasswordPolicy).MaxPasswordAge
+
+import-module ActiveDirectory;
 
 Get-ADUser -filter * -properties PasswordLastSet, PasswordExpired, PasswordNeverExpires, EmailAddress, GivenName, Name, SamAccountName | foreach {
 
