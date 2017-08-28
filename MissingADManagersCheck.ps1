@@ -47,36 +47,3 @@ If ($STATUS)
 Else {
  Write-Verbose  "No email sent"
 }
-
-
-if ($STATUS) {
-        Write-Verbose "Records found, there's issues to correct"
-}
-
-#Define CSS for HTML email
-$head = @’
-<style>
-body { background-color:#FFFFFF;
-       font-family:Tahoma;
-       font-size:12pt; }
-td, th { border:1px solid black;
-         border-collapse:collapse; }
-th { color:white;
-     background-color:black; }
-table, tr, td, th { padding: 2px; margin: 0px }
-table { margin-left:50px; }
-</style>
-‘@
-
-If ($STATUS) 
-{
- Write-Verbose  "Sending email"
-    $MessageBody += "The following users in OU $SearchScope do not have the 'Manager' field populated. This can impact other automation that relies on this value, Team Calendar views in Outlook, Delve, etc. and should be fixed. `r`n `r`n $STATUS"
-    $Message = ConvertTo-HTML -Head $Head -Body $MessageBody -Title "Missing AD Managers Report"
-    Write-Host "Message: " $Message
-    send-mailmessage -to $SendToEmail -from $SendFromEmail -Subject "Missing AD Managers Report" -body ($Message | Out-String) -smtpserver $SMTPServer -BodyAsHtml -Priority High
-    Write-Host "Email message sent"
-}
-Else {
- Write-Verbose  "No email sent"
-}
