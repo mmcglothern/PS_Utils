@@ -40,7 +40,7 @@ If ($STATUS)
     $MessageBody += "The following users in OU $SearchScope do not have the 'Manager' field populated. This can impact other automation that relies on this value, Team Calendar views in Outlook, Delve, etc. and should be fixed. `r`n `r`n $STATUS"
     $Message = ConvertTo-HTML -Head $Head -Body $MessageBody -Title "Missing AD Managers Report"
     Write-Host "Message: " $Message
-    send-mailmessage -to $SendToEmail -from $SendFromEmail -Subject "Hyper-V Replica Health Alert" -body ($Message | Out-String) -smtpserver $SMTPServer -BodyAsHtml -Priority High
+    send-mailmessage -to $SendToEmail -from $SendFromEmail -Subject "Missing AD Managers Report" -body ($Message | Out-String) -smtpserver $SMTPServer -BodyAsHtml -Priority High
     Write-Host "Email message sent"
 }
 Else {
