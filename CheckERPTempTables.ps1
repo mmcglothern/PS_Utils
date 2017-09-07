@@ -149,9 +149,9 @@ If ($DBCheck1.Item(0) -gt 0) {
     Write-Verbose  "Sending email"
     $MessageBody += "The <<TABLENAME>> table in ERP database currently has multiple ($DBCheck1.Item(0)) rows.  This is a temporary table and should have no records unless there's a transaction currently in progress."
     $Message = ConvertTo-HTML -Head $Head -Body $MessageBody -Title "<<TABLENAME>> row count is high"
-    Write-Host "Message: " $Message
+    Write-Verbose "Message: " $Message
     send-mailmessage -to $SendToEmail -from $SendFromEmail -Subject "<<TABLENAME>> row count is high" -body ($Message | Out-String) -smtpserver $SMTPServer -BodyAsHtml -Priority High
-    Write-Host "Email message sent"    
+    Write-Verbose "Email message sent"    
 }
 Else {
     Write-Verbose  "No email sent"
@@ -166,9 +166,9 @@ If ($DBCheck2.Item(0) -gt 0) {
     Write-Verbose  "Sending email"
     $MessageBody += "The <<TABLENAME>> table in ERP database currently has multiple ($DBCheck1.Item(0)) rows.  This is a temporary table and should have no records unless there's a transaction currently in progress."
     $Message = ConvertTo-HTML -Head $Head -Body $MessageBody -Title "<<TABLENAME>> row count is high"
-    Write-Host "Message: " $Message
+    Write-Verbose "Message: " $Message
     send-mailmessage -to $SendToEmail -from $SendFromEmail -Subject "<<TABLENAME>> row count is high" -body ($Message | Out-String) -smtpserver $SMTPServer -BodyAsHtml -Priority High
-    Write-Host "Email message sent"    
+    Write-Verbose "Email message sent"    
 }
 Else {
     Write-Verbose  "No email sent"
