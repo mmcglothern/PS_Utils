@@ -1,7 +1,7 @@
 #Function to retrieve uptime in parseable format. 
 #Get-WmiObject is used instead of Get-CimInstance to provide backward compatibility with POSH 1.0 and 2.0.
 #Source logic: https://blogs.technet.microsoft.com/heyscriptingguy/2013/03/27/powertip-get-the-last-boot-time-with-powershell/
-#Written by Mike McGlothern 11/9/2017, version 1.
+#Written by Mike McGlothern 11/9/2017, version 1.0
 
 function Get-Uptime{
     <#
