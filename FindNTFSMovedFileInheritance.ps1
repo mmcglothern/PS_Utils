@@ -4,7 +4,7 @@
 
 $search_folder = "<PATH TO FOLDER OR FILE>"
 $out_file = "C:\temp\AuditTest.csv"
-#$out_error = "C:\temp\AuditErrors.csv"
+$out_error = "C:\temp\AuditErrors.csv"
 
 $items = Get-ChildItem -Path $search_folder -recurse
 
