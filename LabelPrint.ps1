@@ -6,7 +6,7 @@
 #This script depends upon rawprint.exe, written by Edward Mendelson and PS2EXE
     #rawprint documentation: http://www.columbia.edu/~em36/windowsrawprint.html
     #rawprint download: http://www.columbia.edu/~em36/RawPrint.exe
-    #PS2EXE downoad: https://github.com/MScholtes/TechNet-Gallery
+    #PS2EXE download: https://github.com/MScholtes/TechNet-Gallery
 
 #Version 1.0
 #Written 1/27/2021 by Mike McGlothern
