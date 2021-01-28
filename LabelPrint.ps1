@@ -29,6 +29,7 @@ function Get-TimeStamp {
     return "[{0:MM/dd/yy} {0:HH:mm:ss}]" -f (Get-Date)
 }
 
+#Convoluted way of getting path to script - naked $PSScriptRoot variable does not appear to work with PS2EXE.
 $scriptDir = if (-not $PSScriptRoot) {  # $PSScriptRoot not defined?
     # Get the path of the executable *as invoked*, via
     # [environment]::GetCommandLineArgs()[0],
@@ -52,7 +53,8 @@ Try {
     (get-content -path $filename -raw) -replace '\^POI', '^PON' | Out-file -encoding ascii $filename
 
     #Retrieve printer path from config file.  -ErrorAction Stop forces any get-content errors to stop so that error can be caught.
-    Try {aon Stop
+    Try {
+        $printerpath = get-content $scriptDir\printer.cfg -ErrorAction Stop
         "$(Get-TimeStamp) $printerpath" | Out-File -Append $scriptDir\PrintLog.txt
     }
     Catch {
@@ -60,7 +62,7 @@ Try {
     }
 
     #uses rawprint.exe; passes printer path and filename
-    $printcommand = ".\rawprint.exe `"$printerpath`" `"$filename`""
+    $printcommand = "$scriptDir.\rawprint.exe `"$printerpath`" `"$filename`""
     "$(Get-TimeStamp) Printer command string: $printcommand" | Out-File -Append $scriptDir\PrintLog.txt
     Invoke-Expression $printcommand
     "$(Get-TimeStamp) Printer command sent" | Out-File -Append $scriptDir\PrintLog.txt
